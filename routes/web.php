@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use PhpParser\Node\Stmt\Return_;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/',[\App\Http\Controllers\PostController::class, 'index'])->name('accueil');
+Route::get('/article/{id}', [\App\Http\Controllers\PostController::class, 'show'])->whereNumber('id');
+Route::get('/contact', [\App\Http\Controllers\PostController::class, 'contact'])->name('contact');
+
+/*
+Route::get('/post', function () {
+    return 'Jordan is the boss';
 });
+
+Route::get('/json', function(){
+    return response()->json([
+       'nom'=>'rema',
+        'prenom'=>"jordan"
+    ]);
+});
+
+Route::get('/articles', function(){
+    return view('article');
+});
+*/
